@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="hoja estilo/index.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <title>DADO</title>
+</head>
+<body>
+
+
+    <div class="contenedor-intro">
+        <h1>Tu dado virtual</h1>
+        <p>¡Bienvenido a Tu dado virtual! El lugar donde los dados cobran vida, descubres probabilidades y cada lanzamiento cuenta una historia.</p>
+    </div>
+
+
+
+    <div class="contenedor-navegacion">
+        <nav>
+            <a href="#Dado6caras">Dado 6 Caras</a>
+            <a href="#Dado10caras">Dado 10 Caras</a>
+            <a href="#Dado20caras">Dado 20 Caras</a>
+        </nav>
+    </div>
+
+
+
+    <div class="contenedor-global">
+        <div class="contenedor-dados">
+            <div class="contenedor-dado6">
+                <div class="subContenedor-dado6">
+                    <h3>DADO 6 CARAS</h3>
+                </div>
+                <input type="button" onclick="dado6();" value="Lanza el dado">
+                <div id="dado6"></div>
+                <div>
+                    <img src="" id="imgDado6">
+                </div>
+
+                <div class="contenedor-contador" id="contador"></div>
+
+                <div class="contenedor-estadisticas">
+                    <div id="estadisticaCara1">Cara 1: 0 veces</div>
+                    <div id="estadisticaCara2">Cara 2: 0 veces</div>
+                    <div id="estadisticaCara3">Cara 3: 0 veces</div>
+                    <div id="estadisticaCara4">Cara 4: 0 veces</div>
+                    <div id="estadisticaCara5">Cara 5: 0 veces</div>
+                    <div id="estadisticaCara6">Cara 6: 0 veces</div>
+                </div>
+
+                <div class="subContenedor-promedio">
+                    <div class="barra-contenedor">
+                        <div class="barra" id="promedio1"></div>
+                    </div>
+                    <div class="barra-contenedor">
+                        <div class="barra" id="promedio2"></div>
+                    </div>
+                    <div class="barra-contenedor">
+                        <div class="barra" id="promedio3"></div>
+                    </div>
+                    <div class="barra-contenedor">
+                        <div class="barra" id="promedio4"></div>
+                    </div>
+                    <div class="barra-contenedor">
+                        <div class="barra" id="promedio5"></div>
+                    </div>
+                    <div class="barra-contenedor">
+                        <div class="barra" id="promedio6"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contenedor-dado">
+                <h3>DADO 10 CARAS</h3>
+                <input type="button" onclick="dado10();" value="Lanza el dado">
+                <div id="dado10"></div>
+                <div>
+                    <img src="" id="imgDado10">
+                </div>
+            </div>
+
+            <div class="contenedor-dado">
+                <h3>DADO 20 CARAS</h3>
+                <input type="button" onclick="dado20();" value="Lanza el dado">
+                <div id="dado20"></div>
+                <div>
+                    <img src="" id="imgDado20">
+                </div>
+            </div>
+        </div>
+    </div>
+   
+
+
+    <script type="text/javascript">
+
+        var contador=0; //varaible para contar los lanzamientos del daro 
+        var historial=""; //variable para almacenar el hostorial de los lanzameintos 
+        var promedio=0; //variable para mostrar el promedio de cada cara
+
+        var cara1=0;
+        var cara2=0;
+        var cara3=0;
+        var cara4=0;
+        var cara5=0;
+        var cara6=0;
+
+        function dado6(){
+
+            var dado6;
+            var imgDado6;
+
+            //generamos un numero aleatotio entre 1 y 6
+            dado6= Math.floor(Math.random()*6)+1;
+
+            //incrementamos el contador de lanzamientos 
+            contador++;
+
+            //almacenar el resultado de los lanzamientos del dado en la variable historial 
+            if (historial=="") {
+                historial=dado6; // para almacenar el primer lanzamiento 
+                
+            } else {
+                historial+=", "+dado6; //ponemos una coma para concatener los nuevos lanzamientos 
+            }
+
+            //incrementar el contador de cada cara 
+            switch (dado6) {
+                case 1:
+                    cara1++
+                    break;
+                case 2:
+                    cara2++
+                    break;
+                case 3:
+                    cara3++
+                    break;
+                case 4:
+                    cara4++
+                    break;
+                case 5:
+                    cara5++
+                    break;
+                case 6:
+                    cara6++
+                    break;
+                default:
+                    break;
+            }
+
+            //asignamos una imagen a cada cara del dado 
+            switch (dado6) {
+                case 1:
+                    imgDado6="img/1_cara.jpg";
+                    break;
+                case 2: 
+                    imgDado6="img/2_cara.jpg";
+                    break; 
+                case 3: 
+                    imgDado6="img/3_cara.jpg";
+                    break;
+                case 4: 
+                    imgDado6="img/4_cara.jpg"; 
+                    break;
+                case 5: 
+                    imgDado6="img/5_cara.jpg";
+                    break; 
+                case 6: 
+                    imgDado6="img/6_cara.jpg";
+                    break;
+                default:
+                    break;
+            }
+
+            var porcetajeCara1= (cara1  / contador)*100; 
+            var porcetajeCara2= (cara2  / contador)*100; 
+            var porcetajeCara3= (cara3  / contador)*100; 
+            var porcetajeCara4= (cara4  / contador)*100; 
+            var porcetajeCara5= (cara5  / contador)*100; 
+            var porcetajeCara6= (cara6  / contador)*100; 
+
+
+
+            document.getElementById('imgDado6').src=imgDado6; 
+            document.getElementById('contador').innerHTML="Lanzamientos: "+contador;
+             
+            document.getElementById('estadisticaCara1').innerHTML = "Cara 1: " + cara1 + " veces";
+            document.getElementById('estadisticaCara2').innerHTML = "Cara 2: " + cara2 + " veces";
+            document.getElementById('estadisticaCara3').innerHTML = "Cara 3: " + cara3 + " veces";
+            document.getElementById('estadisticaCara4').innerHTML = "Cara 4: " + cara4 + " veces";
+            document.getElementById('estadisticaCara5').innerHTML = "Cara 5: " + cara5 + " veces";
+            document.getElementById('estadisticaCara6').innerHTML = "Cara 6: " + cara6 + " veces";
+            
+
+            document.getElementById('promedio1').style.width= porcetajeCara1+"%";
+            document.getElementById('promedio1').innerHTML="Cara 1: "+porcetajeCara1.toFixed(1)+"%";
+
+            document.getElementById('promedio2').style.width= porcetajeCara2+"%";
+            document.getElementById('promedio2').innerHTML="Cara 2: "+porcetajeCara2.toFixed(1)+"%";
+
+            document.getElementById('promedio3').style.width= porcetajeCara3+"%";
+            document.getElementById('promedio3').innerHTML="Cara 3: "+porcetajeCara3.toFixed(1)+"%";
+
+            document.getElementById('promedio4').style.width= porcetajeCara4+"%"; 
+            document.getElementById('promedio4').innerHTML="Cara 4: "+porcetajeCara4.toFixed(1)+"%";
+
+            document.getElementById('promedio5').style.width= porcetajeCara5+"%"; 
+            document.getElementById('promedio5').innerHTML="Cara 5: "+porcetajeCara5.toFixed(1)+"%";
+
+            document.getElementById('promedio6').style.width= porcetajeCara6+"%";
+            document.getElementById('promedio6').innerHTML="Cara 6: "+porcetajeCara6.toFixed(1)+"%"; 
+        }   
+        
+        function dado10(){
+
+            var dado10; 
+            var imgDado10; 
+
+            dado10=Math.floor(Math.random()*10)+1; 
+            
+            switch (dado10) {
+                case 1:
+                    imgDado10="img/1_cara.jpg";
+                    break;
+                case 2:
+                    imgDado10="img/2_cara.jpg";
+                    break;
+            
+                case 3:
+                    imgDado10="img/3_cara.jpg";
+                    break;
+            
+                case 4:
+                    imgDado10="img/4_cara.jpg";
+                    break;
+            
+                case 5:
+                    imgDado10="img/5_cara.jpg";
+                    break;
+                case 6:
+                    imgDado10="img/6_cara.jpg";
+                    break;
+                case 7:
+                    imgDado10="img/7_cara.png";
+                    break;
+            
+                case 8:
+                    imgDado10="img/8_cara.png";
+                    break;
+            
+                case 9:
+                    imgDado10="img/9_cara.png";
+                    break;
+            
+                case 10:
+                    imgDado10="img/10_cara.png";
+                    break;
+            
+                default:
+                    break;
+            }
+            
+            document.getElementById('imgDado10').src=imgDado10;
+        }
+
+        function dado20(){
+
+            var dado20; 
+            var imgDado20; 
+            dado20= Math.floor(Math.random()*20)+1; 
+
+            switch (dado20) {
+                case 1:
+                    imgDado20="img/1_cara.jpg";
+                    break;
+                case 2:
+                    imgDado20="img/2_cara.jpg";
+                    break;
+            
+                case 3:
+                    imgDado20="img/3_cara.jpg";
+                    break;
+            
+                case 4:
+                    imgDado20="img/4_cara.jpg";
+                    break;
+            
+                case 5:
+                    imgDado20="img/5_cara.jpg";
+                    break;
+                case 6:
+                    imgDado20="img/6_cara.jpg";
+                    break;
+                case 7:
+                    imgDado20="img/7_cara.png";
+                    break;
+            
+                case 8:
+                    imgDado20="img/8_cara.png";
+                    break;
+            
+                case 9:
+                    imgDado20="img/9_cara.png";
+                    break;
+            
+                case 10:
+                    imgDado20="img/10_cara.png";
+                    break;
+            
+                case 11:
+                    imgDado20="img/11_cara.png";
+                    break;
+            
+                case 12:
+                    imgDado20="img/12_cara.png";
+                    break;
+            
+                case 13:
+                    imgDado20="img/13_cara.png";
+                    break;
+            
+                case 14:
+                    imgDado20="img/14_cara.png";
+                    break;
+            
+                case 15:
+                    imgDado20="img/15_cara.png";
+                    break;
+            
+                case 16:
+                    imgDado20="img/16_cara.png";
+                    break;
+            
+                case 17:
+                    imgDado20="img/17_cara.png";
+                    break;
+            
+                case 18:
+                    imgDado20="img/18_cara.png";
+                    break;
+            
+                case 19:
+                    imgDado20="img/19_cara.png";
+                    break;
+            
+                case 20:
+                    imgDado20="img/20_cara.png";
+                    break;
+            
+                default:
+                    break;
+            }
+            
+            document.getElementById('imgDado20').src=imgDado20;
+        }
+    </script>
+</body>
+</html>

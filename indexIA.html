@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="hoja estilo/indexIA.css">
+    <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Inter:wght@100..900&family=Poppins:wght@100..900&display=swap" rel="stylesheet">
+    <title>Dado Virtual Mejorado</title>
+</head>
+<body>
+
+    <header class="header">
+        <h1>¡Bienvenido al Dado Virtual!</h1>
+        <p>Explora los dados de 6, 10 y 20 caras. Lanza y ve el resultado.</p>
+    </header>
+
+    <div class="nav">
+        <nav>
+            <a href="#Dado6caras">Dado 6 Caras</a>
+            <a href="#Dado10caras">Dado 10 Caras</a>
+            <a href="#Dado20caras">Dado 20 Caras</a>
+        </nav>
+    </div>
+
+    <main class="contenedor-global">
+        <!-- Sección para dado de 6 caras -->
+        <section class="contenedor-dado" id="Dado6caras">
+            <h3>DADO 6 CARAS</h3>
+            <button class="btn-lanzar" onclick="lanzarDado(6);">Lanzar</button>
+            <div id="resultado6"></div>
+            <div id="imagenDado6" class="imagen-dado"></div>
+            <p id="estadisticas6"></p>
+        </section>
+
+        <!-- Sección para dado de 10 caras -->
+        <section class="contenedor-dado" id="Dado10caras">
+            <h3>DADO 10 CARAS</h3>
+            <button class="btn-lanzar" onclick="lanzarDado(10);">Lanzar</button>
+            <div id="resultado10"></div>
+            <div id="imagenDado10" class="imagen-dado"></div>
+            <p id="estadisticas10"></p>
+        </section>
+
+        <!-- Sección para dado de 20 caras -->
+        <section class="contenedor-dado" id="Dado20caras">
+            <h3>DADO 20 CARAS</h3>
+            <button class="btn-lanzar" onclick="lanzarDado(20);">Lanzar</button>
+            <div id="resultado20"></div>
+            <div id="imagenDado20" class="imagen-dado"></div>
+            <p id="estadisticas20"></p>
+        </section>
+
+        <!-- Juego de Adivinanza -->
+        <div class="game-container">
+            <label for="guess">Adivina el número (1-6):</label>
+            <input type="number" id="guess" min="1" max="6" placeholder="Escribe un número del 1 al 6">
+            <button id="submit" onclick="rollDice()">Lanzar Dado</button>
+            <p id="feedback"></p>
+            <div id="dice-result">
+                <p id="dice-text">Haz tu adivinanza y lanza el dado.</p>
+            </div>
+            <button id="reset" onclick="resetGame()">Reiniciar Juego</button>
+        </div>
+    </main>
+
+    <script type="text/javascript">
+        // Variables de contadores y estadísticas
+        let lanzamientos6 = 0, lanzamientos10 = 0, lanzamientos20 = 0;
+        let caras6 = [0, 0, 0, 0, 0, 0]; // Contadores para las caras del dado de 6 caras
+        let caras10 = Array(10).fill(0);  // Contadores para las caras del dado de 10 caras
+        let caras20 = Array(20).fill(0);  // Contadores para las caras del dado de 20 caras
+
+        // Función para lanzar los dados (6, 10 o 20 caras)
+        function lanzarDado(caras) {
+            let resultado;
+            if (caras === 6) {
+                resultado = Math.floor(Math.random() * 6) + 1;
+                caras6[resultado - 1]++;
+                lanzamientos6++;
+                actualizarEstadisticas(caras, resultado);
+            } else if (caras === 10) {
+                resultado = Math.floor(Math.random() * 10) + 1;
+                caras10[resultado - 1]++;
+                lanzamientos10++;
+                actualizarEstadisticas(caras, resultado);
+            } else if (caras === 20) {
+                resultado = Math.floor(Math.random() * 20) + 1;
+                caras20[resultado - 1]++;
+                lanzamientos20++;
+                actualizarEstadisticas(caras, resultado);
+            }
+            mostrarResultado(caras, resultado);
+        }
+
+        // Función para actualizar las estadísticas después de lanzar el dado
+        function actualizarEstadisticas(caras, resultado) {
+            let porcentaje = (count, lanzamientos) => ((count / lanzamientos) * 100).toFixed(2);
+            let stats;
+            if (caras === 6) {
+                stats = caras6.map((count, index) => `Cara ${index + 1}: ${count} veces (${porcentaje(count, lanzamientos6)}%)`);
+                document.getElementById('estadisticas6').innerHTML = stats.join('<br>');
+            } else if (caras === 10) {
+                stats = caras10.map((count, index) => `Cara ${index + 1}: ${count} veces (${porcentaje(count, lanzamientos10)}%)`);
+                document.getElementById('estadisticas10').innerHTML = stats.join('<br>');
+            } else if (caras === 20) {
+                stats = caras20.map((count, index) => `Cara ${index + 1}: ${count} veces (${porcentaje(count, lanzamientos20)}%)`);
+                document.getElementById('estadisticas20').innerHTML = stats.join('<br>');
+            }
+        }
+
+        // Función para mostrar el resultado del dado lanzado
+        function mostrarResultado(caras, resultado) {
+            document.getElementById(`resultado${caras}`).innerHTML = `Resultado: ${resultado}`;
+        }
+
+        // Juego de Adivinanza
+        let diceResult;
+        let attempts = 0;
+
+        function rollDice() {
+            const userGuess = parseInt(document.getElementById('guess').value);
+
+            if (isNaN(userGuess) || userGuess < 1 || userGuess > 6) {
+                document.getElementById('feedback').innerText = 'Por favor, ingresa un número entre 1 y 6.';
+                return;
+            }
+
+            diceResult = Math.floor(Math.random() * 6) + 1;
+            attempts++;
+
+            document.getElementById('dice-text').innerText = `El dado salió: ${diceResult}`;
+
+            if (userGuess === diceResult) {
+                document.getElementById('feedback').innerText = `¡Felicidades! Adivinaste correctamente en ${attempts} intentos.`;
+            } else {
+                document.getElementById('feedback').innerText = 'No acertaste. Intenta nuevamente.';
+            }
+
+            document.getElementById('submit').disabled = true;
+            document.getElementById('reset').style.display = 'block';
+        }
+
+        function resetGame() {
+            attempts = 0;
+            document.getElementById('feedback').innerText = '';
+            document.getElementById('guess').value = '';
+            document.getElementById('dice-text').innerText = 'Haz tu adivinanza y lanza el dado.';
+            document.getElementById('submit').disabled = false;
+            document.getElementById('reset').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
+

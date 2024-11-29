@@ -1,0 +1,167 @@
+body{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0 2em;
+    font-family: "Geist Mono", monospace;
+    font-optical-sizing: auto;
+}
+.contenedor-intro{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+}
+.contenedor-intro h1{
+    font-size: 5em;
+    color: black;
+    margin-bottom: 0;   
+}
+.contenedor-intro p{
+    font-size: 2em;
+    color: black;
+    margin: 1em;
+    font-weight: bold;
+}
+.contenedor-navegacion{
+    display: flex;
+    justify-content: center;
+    margin: 2em;  
+}
+.contenedor-navegacion nav{
+    display: flex;
+    gap: 5em;
+}
+.contenedor-navegacion a{
+    text-decoration: none;
+    font-weight: bold;
+    position: relative;
+    color: black;
+    font-size: 1.5em;
+    transition: tranform 0.3s ease;
+}
+.contenedor-navegacion a::after{
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 3px;
+    background-color:#b31d3f;
+    transition: width 0.3s ease;
+}
+.contenedor-navegacion a:hover{
+    transform: scale(1.2);
+}
+.contenedor-navegacion a:hover::after{
+    width: 100%;
+}
+
+#imgDado6,#imgDado10, #imgDado20{
+    margin-top: 10px;
+    height: 100px;
+    border-radius: 10px;
+}
+.contenedor-global{
+    margin-top: 200px;
+    display: flex;
+    justify-content: space-around; 
+    align-items: flex-start;  
+    min-height: 100vh;
+    flex-wrap: wrap;  
+    gap: 2em;  
+    padding: 0 2em;
+}
+
+.contenedor-dados{
+    display: flex;
+    gap: 2em; 
+    justify-content: center;
+    width: 100%;
+}
+.contenedor-dado6, .contenedor-dado{
+    background-color: black;
+    width: 50%;  
+    max-width: 600px;  
+    text-align: center;
+    border-radius: 12px;  
+    padding: 2em;  
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); 
+    color: white;  
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+.contenedor-dado6 h3, .contenedor-dado h3{
+    font-size: 2.5em;
+    font-weight: bold;
+    margin-bottom: 1.5em;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border-bottom: 3px solid #fff;
+    padding-bottom: 0.5em;
+    text-align: center;
+    
+}
+
+.contenedor-dado6 input, .contenedor-dado input{
+    background-color: white;
+    color: black;
+    border: none;
+    padding: 1em 2em;
+    font-size: 1.3em;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease; 
+    margin-top: 2em;  
+}
+
+.contenedor-dado6 input:hover, .contenedor-dado input:hover{
+    background-color:#b31d3f;
+    color: white;
+    transform: scale(1.05);
+}
+
+.contenedor-contador, .contenedor-historial{
+    font-size: 1.2em;
+    color: white;
+    margin-top: 1.5em;
+    text-align: center;
+}
+
+
+.subContenedor-promedio{
+    width: 100%;
+    margin-top: 2em;
+}
+
+.barra-contenedor{
+    width: 100%;
+    background-color: white;
+    border-radius: 10px;
+    margin: 10px 0;
+    
+}
+.barra{
+    height: 30px;
+    background-color: #f83c86;
+    width: 0;
+    border-radius: 10px;
+    transition: width 0.3s ease;
+    color: white; 
+    font-size: 0.8em; 
+    font-weight: bold; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; 
+    text-align: center;
+    position: relative; 
+}
+
